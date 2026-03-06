@@ -113,15 +113,12 @@ stages:
               runOptions: commands
               commands: |
                 set -e
-                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' -u postgres psql -c "\du"
-                # Drop DB
-                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' -u postgres psql -c "DROP DATABASE IF EXISTS odoo;"
-
-                # Create DB
-                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' -u postgres psql -c "CREATE DATABASE odoo OWNER odoo17;"
-
-                # Restore SQL
-                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' -u postgres psql -d odoo -f /home/azureuser/deploy-temp/odoo.sql
+                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' chmod +x $(restoreDBscript)
+                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' $(restoreDBscript) \
+                    "$(DB_PASSWORD)" \
+                    "$(dbUser)" \
+                    "$(dbName)" \
+                    "$(tempDeploy)/odoo.sql"
 
           # Run update script
           - task: SSH@0
