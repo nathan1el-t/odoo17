@@ -1,5 +1,5 @@
 # Azure Pipeline Agent
-agent/
+agent/*
 
 # OS generated files
 .DS_Store
