@@ -9,8 +9,8 @@ pool:
 
 variables:
   repoUrl: 'https://github.com/nathan1el-t/odoo17.git'
-  updateScript: '/home/azureuser/deploy-temp/update_code.sh'
-  stagePath: '/home/azureuser/'
+  updateScript: '/home/nathaniel/deploy-temp/update_code.sh'
+  stagePath: '/home/nathaniel/'
 
 stages:
 
@@ -112,8 +112,8 @@ stages:
               runOptions: commands
               commands: |
                 set -e
-                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' cp /home/azureuser/deploy-temp/restore_db.sh /tmp/
-                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' cp /home/azureuser/deploy-temp/odoo.sql /tmp/
+                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' cp /home/nathaniel/deploy-temp/restore_db.sh /tmp/
+                echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' cp /home/nathaniel/deploy-temp/odoo.sql /tmp/
 
                 echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' chmod +x /tmp/restore_db.sh
                 echo "$(STAGINGUSERPASSWORD)" | sudo -S -p '' chmod 644 /tmp/odoo.sql
